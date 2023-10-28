@@ -1,0 +1,121 @@
+.navbar {
+    padding: 1rem 2rem;
+    background-color: #D2E0FB;
+}
+
+.grid {
+    padding: 2rem;
+}
+
+.icon {
+    cursor: pointer;
+    color: #f8f8f8;
+    background-color: #2e2e2e;
+}
+
+.icon:hover {
+    box-shadow: 2px 2px 5px #2e2e2e;
+}
+
+.cards {
+    padding: 2rem;
+}
+
+.checkbox {
+    width: 25px;
+    height: 25px;
+}
+
+.delete,
+.edit {
+    cursor: pointer;
+}
+
+.bg {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: none;
+}
+
+.submit {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    padding: 3rem;
+}
+
+.submit-title {
+    width: 30rem;
+    height: 4rem;
+    padding: 1rem 0;
+    font-size: 20px;
+}
+
+.submit-text {
+    width: 30rem;
+    padding: 1rem 0;
+    font-size: 20px;
+}
+
+.show1,
+.show2 {
+    display: block;
+    overflow: hidden;
+}
+
+.show3 {
+    background-color: #a6a6a6 !important;
+    color: #2a2a2a !important;
+}
+
+input[type=text] {
+    border: 1px solid black;
+    border: 0px solid;
+    color: #2e2e2e;
+}
+
+textarea:focus,
+input:focus {
+    outline: none;
+}
+
+textarea {
+    resize: none !important;
+}
+
+#btn {
+    cursor: pointer;
+}
+
+.default {
+    color: #2e2e2e;
+}
+
+.orange {
+    background-color: #ff8e47;
+    border: 1px solid #ff8e47 !important;
+    color: #f8f8f8;
+}
+
+.red {
+    background-color: #ff6262;
+    border: 1px solid #ff6262 !important;
+    color: #f8f8f8;
+}
+
+.purple {
+    background-color: #B388F9;
+    border: 1px solid #B388F9 !important;
+    color: #f8f8f8;
+}
+
+.cat-but {
+    cursor: pointer;
+}
