@@ -1,5 +1,4 @@
 import payload from 'payload';
-import findByID from 'payload/dist/collections/operations/findByID';
 
 /** @type {import('payload/types').CollectionConfig} */
 const Todo = {
@@ -45,11 +44,12 @@ const Todo = {
         afterChange: [
             async (args) => {
                 console.log('afterChange - operation:', args.operation);
-                if (args.operation === 'create' || args.operation === 'update' || args.operation === 'delete') {
+                if (args.operation === 'create' || args.operation === 'update') {
                     await payload.create({
                         collection: 'log',
                         data: {
                             collection: 'todo',
+                            todoId: args.doc.id,
                             action: args.operation,
                             timestamp: new Date(),
                         },
@@ -66,22 +66,26 @@ const Todo = {
                         collection: "log",
                         data: {
                             collection: 'todo',
+                            todoId: args.doc.id,
                             action: args.operation,
                             timestamp: new Date(),
                         },
                     });
-                } else if (args.operation === 'deleteByID') {
-                    console.log('Delete operation detected - proceeding to log it.'); // Add this line for debugging
-                    // Log delete operation
-                    await payload.create({
-                        collection: 'log',
-                        data: {
-                            collection: 'todo',
-                            action: 'delete',
-                            timestamp: new Date(),
-                        },
-                    });
                 }
+            },
+        ],
+        afterDelete: [ // Add afterDelete hook for delete operations
+            async (args) => {
+                console.log('afterDelete - operation:', args.operation);
+                await payload.create({
+                    collection: "log",
+                    data: {
+                        collection: 'todo',
+                        todoId: args.doc.id,
+                        action: 'delete',
+                        timestamp: new Date(),
+                    },
+                });
             },
         ],
     }

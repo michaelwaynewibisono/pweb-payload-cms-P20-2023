@@ -9,6 +9,13 @@ const Log: CollectionConfig = {
     },
     fields: [
         {
+            name: 'todoId',
+            label: 'todoId',
+            type: 'relationship',
+            required: true,
+            relationTo: 'todo'
+        },
+        {
             name: 'action',
             label: 'Action',
             type: 'text',
@@ -22,10 +29,10 @@ const Log: CollectionConfig = {
         },
     ],
     access: {
-        read: () => true, // You may adjust the read access control
-        create: () => false, // Prevent direct creation of logs
-        update: () => false, // Prevent updates to logs
-        delete: () => true, // Prevent deletion of logs
+        read: () => true,
+        create: () => false,
+        update: () => false,
+        delete: () => true,
     },
 };
 

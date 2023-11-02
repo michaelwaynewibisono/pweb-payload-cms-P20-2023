@@ -8,8 +8,31 @@
             </button><br><br>
             <input type="text" v-model="taskTitle" class="submit-title" placeholder="Title"><br>
             <textarea rows="6" v-model="taskText" class="submit-text" placeholder="input notes"></textarea><br><br>
-            <button class="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded"
-                @click="updateTask">Update</button>
+            <div class="flex justify-between">
+                <div class="flex gap-3">
+                    <div class="rounded border-solid border flex px-4 py-2 border-black"
+                        @click="toggleCategory('653c920745707c8b37d1e5b6')"
+                        :class="{ 'orange': activeButton.activeButton === '653c920745707c8b37d1e5b6' }"
+                        style="cursor: pointer;">
+                        Daily
+                    </div>
+                    <div class="rounded border-solid border flex px-4 py-2 border-black"
+                        @click="toggleCategory('653c920e45707c8b37d1e5c3')"
+                        :class="{ 'red': activeButton.activeButton === '653c920e45707c8b37d1e5c3' }"
+                        style="cursor: pointer;">
+                        Urgent
+                    </div>
+                    <div class="rounded border-solid border flex px-4 py-2 border-black"
+                        @click="toggleCategory('653c921545707c8b37d1e5d0')"
+                        :class="{ 'purple': activeButton.activeButton === '653c921545707c8b37d1e5d0' }"
+                        style="cursor: pointer;">
+                        Important
+                    </div>
+                </div>
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded"
+                    @click="updateTask">Update
+                </button>
+            </div>
         </div>
     </div>
 
@@ -75,7 +98,7 @@ export default {
             taskNewText: '',
             taskTitle: '',
             taskText: '',
-            activeButton: 'default',
+            activeButton: { activeButton: 'default' },
             tasks: [],
         }
     },
@@ -128,11 +151,15 @@ export default {
         },
 
         readTask(index) {
-            this.temp = index,
-                this.taskTitle = this.tasks[this.temp].title;
+            this.temp = index;
+            this.taskTitle = this.tasks[this.temp].title;
             this.taskText = this.tasks[this.temp].description;
             if (!this.showModal2) this.$router.push({ path: '/' });
             this.$router.push({ path: `/edit/${this.temp}` });
+        },
+
+        toggleCategory(category) {
+            this.activeButton.activeButton = category;
         },
 
         async updateTask() {
@@ -145,6 +172,7 @@ export default {
                     const response = await axios.put(`http://localhost:3000/api/todo/${this.tasks[this.temp].id}`, {
                         title: this.taskTitle,
                         description: this.taskText,
+                        activeButton: this.activeButton.activeButton,
                     });
 
                     if (response.status === 200) {
